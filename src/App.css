@@ -1,38 +1,259 @@
-.App {
-  text-align: center;
+/* --- Reset global --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #0d1117; /* Dark background */
+  color: #e6edf3;
+  min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* --- Conteneur principal --- */
+.app-container,
+.intro {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  padding: 20px;
+}
+
+/* --- Titres --- */
+h1,
+h2 {
+  color: #58a6ff; /* Bleu clair */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* --- Paragraphe d'accueil --- */
+.intro p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #c9d1d9;
+}
+
+/* --- Boutons accueil --- */
+.buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 20px;
+  background: #7c3aed; /* bouton vert stylé */
+  border: none;
+  border-radius: 8px;
   color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background: #9333ea;
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
+button.secondary {
+  background: #1f6feb; /* bleu */
+}
+
+button.secondary:hover {
+  background: #388bfd;
+}
+
+/* --- Formulaires (Login / Register) --- */
+form {
+  background: #161b22;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+input {
+  padding: 12px 15px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+input:focus {
+  border-color: #58a6ff;
+  outline: none;
+}
+
+/* --- Liste de tâches --- */
+ul {
+  list-style: none;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+li {
+  background: #161b22;
+  border: 1px solid #30363d;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+li span.completed {
+  text-decoration: line-through;
+  color: #8b949e;
+}
+footer {
+  color: #58a6ff;
+}
+/* --- Timer + message --- */
+.todo-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.todo-header h2 {
+  color: #7c3aed; /* Violet pour le message */
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.clock {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #58a6ff;
+  background: #161b22;
+  padding: 8px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.4);
+}
+
+/* Petite animation d'apparition */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* --- Navbar --- */
+.navbar {
+  width: 100%;
+  padding: 15px 30px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 1.4rem;
+  color: #58a6ff;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar nav a {
+  text-decoration: none;
+  color: #e6edf3;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+  color: #58a6ff;
+}
+
+.navbar button {
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  input,
+  button {
+    font-size: 0.95rem;
+  }
+}
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@media (max-width: 480px) {
+  h1,
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  input,
+  button {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
