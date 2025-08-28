@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
-  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // Récupération des tâches
-  const fetchTasks = async () => {
+  // 🔹 Récupération des tâches (mémoïsée pour éviter le warning useEffect)
+  const fetchTasks = useCallback(async () => {
     try {
       const res = await api.get("/tasks", {
         headers: { Authorization: `Bearer ${token}` },
@@ -20,9 +18,9 @@ export default function TodoList() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [token]);
 
-  // Ajouter une tâche
+  // 🔹 Ajouter une tâche
   const addTask = async (e) => {
     e.preventDefault();
     try {
@@ -38,7 +36,7 @@ export default function TodoList() {
     }
   };
 
-  // Changer état terminé / non terminé
+  // 🔹 Changer état terminé / non terminé
   const toggleTask = async (id, completed) => {
     try {
       await api.put(
@@ -52,7 +50,7 @@ export default function TodoList() {
     }
   };
 
-  // Supprimer une tâche
+  // 🔹 Supprimer une tâche
   const deleteTask = async (id) => {
     try {
       await api.delete(`/tasks/${id}`, {
@@ -64,13 +62,7 @@ export default function TodoList() {
     }
   };
 
-  // Déconnexion
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  // Timer qui met à jour l'heure chaque seconde
+  // 🔹 Timer qui met à jour l'heure chaque seconde + fetch initial
   useEffect(() => {
     fetchTasks();
     const interval = setInterval(() => {
@@ -78,9 +70,9 @@ export default function TodoList() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchTasks]);
 
-  // Message de bienvenue dynamique
+  // 🔹 Message de bienvenue dynamique
   const getGreeting = () => {
     const hours = currentTime.getHours();
     if (hours < 12) return "☀️ Bonjour";
@@ -103,8 +95,9 @@ export default function TodoList() {
       </div>
 
       <h3>📋 Ma To-Do List</h3>
-      <br></br>
+      <br />
 
+      {/* Formulaire d'ajout */}
       <form onSubmit={addTask}>
         <input
           type="text"
@@ -114,10 +107,12 @@ export default function TodoList() {
         />
         <button type="submit">Ajouter</button>
       </form>
+
       <p style={{ fontSize: "0.9rem", color: "#555" }}>
         💡 Cliquez sur une tâche pour la marquer comme complétée ou non.
       </p>
 
+      {/* Liste des tâches */}
       <ul>
         {tasks.map((task) => (
           <li key={task._id}>
