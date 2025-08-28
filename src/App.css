@@ -49,7 +49,7 @@ h2 {
 
 button {
   padding: 12px 20px;
-  background: #7c3aed; /* bouton vert stylé */
+  background: #7c3aed;
   border: none;
   border-radius: 8px;
   color: white;
@@ -64,7 +64,7 @@ button:hover {
 }
 
 button.secondary {
-  background: #1f6feb; /* bleu */
+  background: #1f6feb;
 }
 
 button.secondary:hover {
@@ -121,15 +121,21 @@ li {
 li span {
   cursor: pointer;
   transition: color 0.3s;
+  word-break: break-word;
 }
 
 li span.completed {
   text-decoration: line-through;
   color: #8b949e;
 }
+
 footer {
   color: #58a6ff;
+  margin-top: auto;
+  text-align: center;
+  padding: 15px;
 }
+
 /* --- Timer + message --- */
 .todo-header {
   display: flex;
@@ -166,6 +172,7 @@ footer {
     transform: translateY(0);
   }
 }
+
 /* --- Navbar --- */
 .navbar {
   width: 100%;
@@ -175,11 +182,15 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navbar h1 {
   font-size: 1.4rem;
   color: #58a6ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navbar nav {
@@ -205,10 +216,11 @@ footer {
   border: none;
   cursor: pointer;
 }
-/* --- Responsive --- */
+
+/* --- Responsive (tablette) --- */
 @media (max-width: 768px) {
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   form {
@@ -220,40 +232,74 @@ footer {
     font-size: 0.95rem;
   }
 }
-.logo-icon {
-  width: 45px;
-  height: 45px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
 
+/* --- Responsive (mobile) --- */
 @media (max-width: 480px) {
   h1,
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    text-align: center;
   }
 
   form {
     padding: 15px;
+    width: 100%;
+    max-width: 100%;
   }
 
   input,
   button {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     padding: 10px;
+    width: 100%; /* ✅ full width sur mobile */
   }
 
   .buttons {
     flex-direction: column;
     gap: 10px;
+    width: 100%;
   }
+
   .navbar {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 10px;
+  }
+
+  .navbar h1 {
+    font-size: 1.1rem;
   }
 
   .navbar nav {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
   }
+
+  ul {
+    max-width: 100%;
+  }
+
+  li {
+    flex-direction: column; /* ✅ bouton passe en dessous du texte */
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  li button {
+    align-self: flex-end; /* ✅ bouton bien aligné */
+  }
+
+  .clock {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
