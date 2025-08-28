@@ -10,23 +10,31 @@ body {
   background: #0d1117; /* Dark background */
   color: #e6edf3;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* --- Conteneur principal --- */
-.app-container,
-.intro {
+.app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+.intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* ⚡ évite les grands vides */
   align-items: center;
   padding: 20px;
+  margin-top: 20px; /* petit espace sous navbar */
 }
 
 /* --- Titres --- */
 h1,
 h2 {
-  color: #58a6ff; /* Bleu clair */
+  color: #58a6ff;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -45,10 +53,11 @@ h2 {
   gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 button {
-  padding: 12px 20px;
+  padding: 14px;
   background: #7c3aed;
   border: none;
   border-radius: 8px;
@@ -74,23 +83,24 @@ button.secondary:hover {
 /* --- Formulaires (Login / Register) --- */
 form {
   background: #161b22;
-  padding: 25px;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px; /* ⚡ plus large qu’avant */
 }
 
 input {
-  padding: 12px 15px;
+  padding: 14px 16px;
   border: 1px solid #30363d;
   border-radius: 8px;
   background: #0d1117;
   color: #e6edf3;
   font-size: 1rem;
+  width: 100%;
   transition: border 0.3s ease;
 }
 
@@ -131,7 +141,6 @@ li span.completed {
 
 footer {
   color: #58a6ff;
-  margin-top: auto;
   text-align: center;
   padding: 15px;
 }
@@ -146,7 +155,7 @@ footer {
 }
 
 .todo-header h2 {
-  color: #7c3aed; /* Violet pour le message */
+  color: #7c3aed;
   font-size: 1.5rem;
   margin-bottom: 5px;
 }
@@ -161,7 +170,7 @@ footer {
   box-shadow: 0 0 10px rgba(88, 166, 255, 0.4);
 }
 
-/* Petite animation d'apparition */
+/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -197,6 +206,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .navbar nav a {
@@ -217,7 +227,7 @@ footer {
   cursor: pointer;
 }
 
-/* --- Responsive (tablette) --- */
+/* --- Responsive tablette --- */
 @media (max-width: 768px) {
   h1 {
     font-size: 1.4rem;
@@ -233,25 +243,28 @@ footer {
   }
 }
 
-/* --- Responsive (mobile) --- */
+/* --- Responsive mobile --- */
 @media (max-width: 480px) {
   h1,
   h2 {
     font-size: 1.2rem;
-    text-align: center;
+  }
+
+  .intro {
+    margin-top: 10px;
+    padding: 15px;
   }
 
   form {
     padding: 15px;
-    width: 100%;
-    max-width: 100%;
+    max-width: 100%; /* ⚡ full width */
   }
 
   input,
   button {
-    font-size: 0.9rem;
-    padding: 10px;
-    width: 100%; /* ✅ full width sur mobile */
+    font-size: 1rem;
+    padding: 12px;
+    width: 100%; /* ⚡ plein écran */
   }
 
   .buttons {
@@ -272,7 +285,6 @@ footer {
   }
 
   .navbar nav {
-    flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
   }
@@ -282,13 +294,13 @@ footer {
   }
 
   li {
-    flex-direction: column; /* ✅ bouton passe en dessous du texte */
+    flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
 
   li button {
-    align-self: flex-end; /* ✅ bouton bien aligné */
+    align-self: flex-end;
   }
 
   .clock {
