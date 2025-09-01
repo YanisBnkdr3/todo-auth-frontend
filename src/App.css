@@ -58,7 +58,7 @@ h2 {
 
 button {
   padding: 14px;
-  background: #7c3aed;
+  background: #1f6feb; /* 🔵 bouton bleu */
   border: none;
   border-radius: 8px;
   color: white;
@@ -68,7 +68,7 @@ button {
 }
 
 button:hover {
-  background: #9333ea;
+  background: #388bfd; /* 🔵 bleu clair au hover */
   transform: translateY(-2px);
 }
 
@@ -139,10 +139,14 @@ li span.completed {
   color: #8b949e;
 }
 
+/* --- Footer --- */
 footer {
   color: #58a6ff;
   text-align: center;
   padding: 15px;
+  background: #161b22;
+  border-top: 1px solid #30363d;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* --- Timer + message --- */
@@ -155,7 +159,7 @@ footer {
 }
 
 .todo-header h2 {
-  color: #7c3aed;
+  color: #1f6feb; /* 🔵 bleu */
   font-size: 1.5rem;
   margin-bottom: 5px;
 }
@@ -257,20 +261,29 @@ footer {
 
   form {
     padding: 15px;
-    max-width: 100%; /* ⚡ full width */
+    max-width: 100%;
   }
 
-  input,
-  button {
+  input {
     font-size: 1rem;
     padding: 12px;
-    width: 100%; /* ⚡ plein écran */
+    width: 100%; /* inputs full width */
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px 16px;
+    width: auto; /* ⚡ bouton s’adapte au texte */
+    min-width: 120px; /* ⚡ taille minimale */
+    max-width: 200px; /* ⚡ limite max */
+    margin: 0 auto; /* ⚡ centré */
+    display: block;
   }
 
   .buttons {
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    gap: 12px;
+    align-items: center;
   }
 
   .navbar {
