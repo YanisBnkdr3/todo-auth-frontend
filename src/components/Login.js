@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 
 export default function Login({ setIsLoggedIn }) {
@@ -13,7 +13,7 @@ export default function Login({ setIsLoggedIn }) {
     try {
       const res = await api.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      setIsLoggedIn(true); // ✅ met à jour l’état global
+      setIsLoggedIn(true);
       navigate("/tasks");
     } catch (err) {
       alert("Erreur de connexion");
@@ -21,22 +21,46 @@ export default function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <div className="intro">
-      <h2>Connexion</h2>
+    <div className="auth-container">
       <form onSubmit={handleLogin}>
+        <h2>Connexion</h2>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#94a3b8",
+            marginBottom: "10px",
+          }}
+        >
+          Bon retour parmi nous !
+        </p>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <button type="submit">Se connecter</button>
+        <button type="submit" className="btn-primary">
+          Se connecter
+        </button>
+        <p
+          style={{ marginTop: "15px", textAlign: "center", fontSize: "0.9rem" }}
+        >
+          Pas encore de compte ?{" "}
+          <Link
+            to="/register"
+            style={{ color: "#00d2ff", textDecoration: "none" }}
+          >
+            S'inscrire
+          </Link>
+        </p>
       </form>
     </div>
   );
